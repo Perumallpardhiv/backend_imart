@@ -8,6 +8,7 @@ const userSchema = new Schema({
     mobileno:{
         type:String,
         required:true,
+        unique:true,
     },
     device_token:{
         type:String,
