@@ -2,10 +2,10 @@ const CategoryService = require('../services/category_services');
 
 exports.addCategory = async(req,res,next)=>{
     try {
-        const {id, name} = req.body;
+        const {name} = req.body;
         const category = await CategoryService.checkCategoryExist(name);
         if(!category){
-            const newCategory = await CategoryService.addCategory(id, name);
+            const newCategory = await CategoryService.addCategory(name);
             res.json({status:1, message:"New Category Added"});
             console.log("Category added Successfully");
         } else {

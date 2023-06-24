@@ -1,11 +1,11 @@
 const CategoryModel = require('../model/category_model');
 
 class CategoryService {
-    static async addCategory(id, name) {
+    static async addCategory(name) {
         try {
-            console.log(`id: ${id}`);
+            // console.log(`id: ${id}`);
             console.log(`name: ${name}`);
-            const createCategory = new CategoryModel({id, name});
+            const createCategory = new CategoryModel({name});
             return await createCategory.save();
         } catch (e) {
             throw e;

@@ -2,14 +2,15 @@ const CartService = require('../services/cart_services');
 
 exports.addToCart = async(req,res,next)=>{
     try {
-        const {productId, quantity} = req.body;
-        const alreadyExist = await CartService.chackCartExist(productId);
+        const {userId, productId, quantity} = req.body;
+        const alreadyExist = await CartService.chackCartExist(userId, productId);
         if(!alreadyExist){
-            const newProduct = await CartService.addProductToCart(productId, quantity);
+            const newProduct = await CartService.addProductToCart(userId, productId, quantity);
             res.json({status:1, message:"New Product Added"});
             console.log("Product added Successfully");
         } else {
-            const updateProductQuantity = await CartService.incCartItemQuantity(productId);
+         
+            const updateProductQuantity = await CartService.incCartItemQuantity(userId, productId);
             res.json({status:1, message:"Product Quantity Updated"});
             console.log("Updated Product Quantity");
         }
@@ -22,13 +23,13 @@ exports.addToCart = async(req,res,next)=>{
 
 exports.incToCart = async(req,res,next)=>{
     try {
-        const {productId} = req.body;
-        const alreadyExist = await CartService.chackCartExist(productId);
+        const {userId, productId} = req.body;
+        const alreadyExist = await CartService.chackCartExist(userId, productId);
         if(!alreadyExist){
             res.json({status:0, message:"Cart not exist"});
             console.log("Cart Not Exist");
         } else {
-            const updateProductQuantity = await CartService.incCartItemQuantity(productId);
+            const updateProductQuantity = await CartService.incCartItemQuantity(userId, productId);
             res.json({status:1, message:"Product Quantity Updated"});
             console.log("Updated Product Quantity");
         }
@@ -41,13 +42,13 @@ exports.incToCart = async(req,res,next)=>{
 
 exports.decToCart = async(req,res,next)=>{
     try {
-        const {productId} = req.body;
-        const alreadyExist = await CartService.chackCartExist(productId);
+        const {userId, productId} = req.body;
+        const alreadyExist = await CartService.chackCartExist(userId, productId);
         if(!alreadyExist){
             res.json({status:0, message:"Cart not exist"});
             console.log("Cart Not Exist");
         } else {
-            const updateProductQuantity = await CartService.decCartItemQuantity(productId);
+            const updateProductQuantity = await CartService.decCartItemQuantity(userId, productId);
             res.json({status:1, message:"Product Quantity Updated"});
             console.log("Updated Product Quantity");
         }
@@ -60,7 +61,8 @@ exports.decToCart = async(req,res,next)=>{
 
 exports.allCart = async (req,res,next)=>{
     try{
-        let products = await CartService.allCartProducts();
+        const {userId} = req.body;
+        let products = await CartService.allCartProducts(userId);
 
         res.json({status:1, message:"All Cart Products fetched", data:products});
         console.log("Got all Cart");

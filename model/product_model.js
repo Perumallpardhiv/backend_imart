@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const db = require('../config/db');
+const CategoryModel = require("./category_model")
+const SubCategoryModel = require("./subCategory_model")
 
 const { Schema } = mongoose;
 
@@ -11,12 +13,14 @@ const productSchema = new Schema({
         unique:true
     },
     categorieId:{
-        type:Number,
-        required:true
+        type:Schema.Types.ObjectId,
+        required:true,
+        ref:CategoryModel.modelName
     },
     subCategorieId:{
-        type:Number,
-        required:true
+        type:Schema.Types.ObjectId,
+        required:true,
+        ref:SubCategoryModel.modelName
     },
     productName:{
         type:String,

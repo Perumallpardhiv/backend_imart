@@ -5,11 +5,11 @@ const db = require('../config/db');
 const { Schema } = mongoose;
 
 const categorySchema = new Schema({
-    id:{
-        type:Number,
-        required:true,
-        unique:true
-    },
+    // id:{
+    //     type:Number,
+    //     required:true,
+    //     unique:true
+    // },
     name:{
         type:String,
         lowercase:true,

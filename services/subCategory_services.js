@@ -1,12 +1,12 @@
 const SubCategoryModel = require('../model/subCategory_model');
 
 class SubCategoryService {
-    static async addSubCategory(id, categorieId, name, description) {
+    static async addSubCategory(categorieId, name, description) {
         try {
             console.log(`categorieId: ${categorieId}`);
             console.log(`name: ${name}`);
             console.log(`description: ${description}`);
-            const createProduct = new SubCategoryModel({id, categorieId, name, description});
+            const createProduct = new SubCategoryModel({categorieId, name, description});
             return await createProduct.save();
         } catch (e) {
             throw e;

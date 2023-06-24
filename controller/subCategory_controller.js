@@ -2,8 +2,8 @@ const SubCategoryService = require('../services/subCategory_services');
 
 exports.addSubCategory = async(req,res,next)=>{
     try {
-        const {id, categorieId, name, description} = req.body;
-        const newProduct = await SubCategoryService.addSubCategory(id, categorieId, name, description);
+        const {categorieId, name, description} = req.body;
+        const newProduct = await SubCategoryService.addSubCategory(categorieId, name, description);
         res.json({status:1, message:"New SubCategory Added"});
         console.log("SubCategory added Successfully");
     } catch (er) {

@@ -1,37 +1,38 @@
 const CartModel = require('../model/cart_model');
 
 class CartService {
-    static async addProductToCart(productId, quantity) {
+    static async addProductToCart(userId, productId, quantity) {
         try {
+            console.log(`userId: ${userId}`);
             console.log(`productId: ${productId}`);
             console.log(`quantity: ${quantity}`);
-            const addToCart = new CartModel({productId, quantity});
+            const addToCart = new CartModel({userId, productId, quantity});
             return await addToCart.save();
         } catch (e) {
             throw e;
         }
     }
 
-    static async chackCartExist(productId){
+    static async chackCartExist(userId, productId){
         try {
-            return await CartModel.findOne({productId});
+            return await CartModel.findOne({userId:userId, productId:productId});
         } catch (e) {
             throw e;
         }
     }
 
-    static async allCartProducts(){
+    static async allCartProducts(userId){
         try {
-            const allCartProducts = await CartModel.find();
+            const allCartProducts = await CartModel.find({userId});
             return allCartProducts;
         } catch (e) {
             throw e;
         }
     }
 
-    static async incCartItemQuantity(productId){
+    static async incCartItemQuantity(userId, productId){
         try {
-            const incCartItemQuantity = await CartModel.updateOne({productId:productId}, {
+            const incCartItemQuantity = await CartModel.updateOne({userId:userId, productId:productId}, {
                 $inc:{
                     quantity:1,
                 }
@@ -42,9 +43,9 @@ class CartService {
         }
     }
 
-    static async decCartItemQuantity(productId){
+    static async decCartItemQuantity(userId, productId){
         try {
-            const decCartItemQuantity = await CartModel.updateOne({productId:productId}, {
+            const decCartItemQuantity = await CartModel.updateOne({userId:userId, productId:productId}, {
                 $inc:{
                     quantity:-1,
                 }
