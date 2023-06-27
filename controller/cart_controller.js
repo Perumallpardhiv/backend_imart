@@ -9,7 +9,6 @@ exports.addToCart = async(req,res,next)=>{
             res.json({status:1, message:"New Product Added"});
             console.log("Product added Successfully");
         } else {
-         
             const updateProductQuantity = await CartService.incCartItemQuantity(userId, productId);
             res.json({status:1, message:"Product Quantity Updated"});
             console.log("Updated Product Quantity");
@@ -17,6 +16,21 @@ exports.addToCart = async(req,res,next)=>{
     } catch (er) {
         res.json({status:0, message:"Adding To Cart failed"});
         console.log("Adding To Cart failed");
+        throw er
+    }
+}
+
+exports.checkCartExist = async(req,res,next)=>{
+    try {
+        const {userId, productId} = req.body;
+        const alreadyExist = await CartService.chackCartExist(userId, productId);
+        if(alreadyExist){
+            res.json({status:1, message:"Exist in Cart", data:alreadyExist});
+            console.log("Exist in Cart");
+        }
+    } catch (er) {
+        res.json({status:0, message:"Checking Cart failed"});
+        console.log("Checking Cart failed");
         throw er
     }
 }

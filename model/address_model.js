@@ -52,7 +52,7 @@ const addressSchema = new Schema({
     },
     isDefault:{
         type:Number,
-        required:true
+        required:true,
     },
 });
 

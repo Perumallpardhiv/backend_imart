@@ -2,8 +2,8 @@ const OrderService = require('../services/order_service');
 
 exports.addOrder = async(req,res,next)=>{
     try {
-        const {userId, addressId, name, subTotal, discoutPrice, grandTotal, paymentMethod, status,date} = req.body;
-        const newOrder = await OrderService.addOrder(userId, addressId, name, subTotal, discoutPrice, grandTotal, paymentMethod, status,date);
+        const {userId, addressId, name, subTotal, discoutPrice, grandTotal, paymentMethod, status, mobile, date} = req.body;
+        const newOrder = await OrderService.addOrder(userId, addressId, name, subTotal, discoutPrice, grandTotal, paymentMethod, status, mobile, date);
         res.json({status:1, message:"New Order Added"});
         console.log("New Order Added");
     } catch (er) {

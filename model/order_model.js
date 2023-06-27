@@ -39,6 +39,11 @@ const orderSchema = new Schema({
         type:String,
         required:true
     },
+    mobile:{
+        type:String,
+        lowercase:true,
+        required:true,
+    },
     date:{
         type:String,
         required:true,
