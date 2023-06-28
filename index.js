@@ -7,6 +7,7 @@ const CartModel = require('./model/cart_model');
 const SubCategoryModel = require('./model/subCategory_model');
 const AddressModel = require('./model/address_model');
 const OrderModel = require('./model/order_model');
+const VendorModel = require('./model/vendor_model');
 
 const port = 3000;
 

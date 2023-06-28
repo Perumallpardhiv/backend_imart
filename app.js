@@ -7,6 +7,7 @@ const productRouter = require('./routes/product_route');
 const cartRouter = require('./routes/cart_route');
 const addressRouter = require('./routes/address_route');
 const orderRouter = require('./routes/order_route');
+const vendorRouter = require('./routes/vendor_route');
 
 const app = express();
 
@@ -19,5 +20,6 @@ app.use('/', productRouter);
 app.use('/', cartRouter);
 app.use('/', addressRouter);
 app.use('/', orderRouter);
+app.use('/', vendorRouter);
 
 module.exports = app;
