@@ -12,9 +12,18 @@ class OrderService {
         }
     }
 
-    static async allOrders(userId) {
+    static async allUserOrders(userId) {
         try {
-            const allOrders = await OrderModel.find({userId});
+            const allUserOrders = await OrderModel.find({userId});
+            return allUserOrders;
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    static async allOrders() {
+        try {
+            const allOrders = await OrderModel.find();
             return allOrders;
         } catch (e) {
             throw e;

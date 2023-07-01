@@ -13,10 +13,22 @@ exports.addOrder = async(req,res,next)=>{
     }
 }
 
-exports.allOrders = async (req,res,next)=>{
+exports.allUserOrders = async (req,res,next)=>{
     try{
         const {userId} = req.body;
-        let orders = await OrderService.allOrders(userId);
+        let orders = await OrderService.allUserOrders(userId);
+        res.json({status:1, message:"All Orders fetched", data:orders});
+        console.log("Got all Orders");
+    } catch (e){
+        res.json({status:0, message:"Orders not fetched"});
+        console.log("Not found Orders");
+        throw e;
+    }
+}
+
+exports.allOrders = async (req,res,next)=>{
+    try{
+        let orders = await OrderService.allOrders();
         res.json({status:1, message:"All Orders fetched", data:orders});
         console.log("Got all Orders");
     } catch (e){
