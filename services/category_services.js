@@ -20,6 +20,14 @@ class CategoryService {
         }
     }
 
+    static async getSpecificCategory(id){
+        try {
+            return await CategoryModel.findById(id);
+        } catch (e) {
+            throw e;
+        }
+    }
+
     static async allCategories(){
         try {
             const allCategoriesExist = await CategoryModel.find();

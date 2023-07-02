@@ -12,7 +12,6 @@ exports.addCategory = async(req,res,next)=>{
             res.json({status:0, message:"Category already exist"});
             console.log("Category already Exist");
         }
-        
     } catch (er) {
         res.json({status:0, message:"Adding Category failed"});
         console.log("Adding category failed");
@@ -28,6 +27,18 @@ exports.allCategories = async (req,res,next)=>{
         console.log("Got all Categories");
     } catch (e){
         console.log("Not found categories");
+        throw e;
+    }
+}
+
+exports.specificCategory = async (req,res,next)=>{
+    try{
+        const {id} = req.body;
+        let specificCategory = await CategoryService.getSpecificCategory(id);
+        res.json({status:1, message:"Category fetched", data:specificCategory});
+        console.log("Got Category");
+    } catch (e){
+        console.log("Not found category");
         throw e;
     }
 }
