@@ -2,10 +2,10 @@ const ProductService = require('../services/product_services');
 
 exports.addProduct = async(req,res,next)=>{
     try {
-        const {productId, categorieId, subCategorieId, productName, description, mrpPrice, sellPrice, isWishlist, image} = req.body;
+        const {productId, categorieId, subCategorieId, productName, description, mrpPrice, sellPrice, isWishlist, unit, image} = req.body;
         const product = await ProductService.checkProductExist(productName);
         if(!product){
-            const newProduct = await ProductService.addProduct(productId, categorieId, subCategorieId, productName, description, mrpPrice, sellPrice, isWishlist, image);
+            const newProduct = await ProductService.addProduct(productId, categorieId, subCategorieId, productName, description, mrpPrice, sellPrice, isWishlist, unit, image);
             res.json({status:1, message:"New Product Added"});
             console.log("Product added Successfully");
         } else {

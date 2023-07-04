@@ -1,11 +1,11 @@
 const ProductModel = require('../model/product_model');
 
 class ProductService {
-    static async addProduct(productId, categorieId, subCategorieId, productName, description, mrpPrice, sellPrice, isWishlist, image) {
+    static async addProduct(productId, categorieId, subCategorieId, productName, description, mrpPrice, sellPrice, isWishlist, unit, image) {
         try {
             console.log(`id: ${productId}`);
             console.log(`name: ${productName}`);
-            const createProduct = new ProductModel({productId, categorieId, subCategorieId, productName, description, mrpPrice, sellPrice, isWishlist, image});
+            const createProduct = new ProductModel({productId, categorieId, subCategorieId, productName, description, mrpPrice, sellPrice, isWishlist, unit, image});
             return await createProduct.save();
         } catch (e) {
             throw e;
