@@ -12,6 +12,29 @@ class ProductService {
         }
     }
 
+    static async updateProduct(productId, categorieId, subCategorieId, productName, description, mrpPrice, sellPrice, isWishlist, unit, image) {
+        try {
+            console.log(`id: ${productId}`);
+            console.log(`name: ${productName}`);
+            const update =  await ProductModel.updateOne({productId:productId}, {
+                $set:{
+                    categorieId:categorieId,
+                    subCategorieId:subCategorieId,
+                    productName:productName,
+                    description:description,
+                    mrpPrice:mrpPrice,
+                    sellPrice:sellPrice,
+                    isWishlist:isWishlist,
+                    unit:unit,
+                    image:image,
+                }
+            })
+            return update;
+        } catch (e) {
+            throw e;
+        }
+    }
+
     static async checkProductExist(productName){
         try {
             return await ProductModel.findOne({productName});
