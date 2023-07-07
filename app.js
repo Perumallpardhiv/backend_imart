@@ -8,6 +8,7 @@ const cartRouter = require('./routes/cart_route');
 const addressRouter = require('./routes/address_route');
 const orderRouter = require('./routes/order_route');
 const vendorRouter = require('./routes/vendor_route');
+const paymentRouter = require('./routes/payments_route');
 
 const app = express();
 
@@ -21,5 +22,6 @@ app.use('/', cartRouter);
 app.use('/', addressRouter);
 app.use('/', orderRouter);
 app.use('/', vendorRouter);
+app.use('/', paymentRouter);
 
 module.exports = app;

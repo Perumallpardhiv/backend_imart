@@ -8,6 +8,7 @@ const SubCategoryModel = require('./model/subCategory_model');
 const AddressModel = require('./model/address_model');
 const OrderModel = require('./model/order_model');
 const VendorModel = require('./model/vendor_model');
+const PaymentModel = require('./model/payments_model');
 
 const port = 3000;
 
