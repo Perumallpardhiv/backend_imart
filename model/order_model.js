@@ -47,6 +47,10 @@ const orderSchema = new Schema({
     date:{
         type:String,
         required:true,
+    },
+    delivereddate:{
+        type:String,
+        required:true,
     }
 });
 
