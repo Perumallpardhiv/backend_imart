@@ -28,7 +28,7 @@ const paymentSchema = new Schema({
         required:true
     },
     mobile:{
-        type:Number,
+        type:String,
         required:true
     },
     paymentdate:{
