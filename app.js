@@ -9,6 +9,7 @@ const addressRouter = require('./routes/address_route');
 const orderRouter = require('./routes/order_route');
 const vendorRouter = require('./routes/vendor_route');
 const paymentRouter = require('./routes/payments_route');
+const adminRouter = require('./routes/admin_route');
 
 const app = express();
 
@@ -23,5 +24,6 @@ app.use('/', addressRouter);
 app.use('/', orderRouter);
 app.use('/', vendorRouter);
 app.use('/', paymentRouter);
+app.use('/', adminRouter);
 
 module.exports = app;
