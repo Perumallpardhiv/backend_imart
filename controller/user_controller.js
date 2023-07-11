@@ -39,3 +39,15 @@ exports.login = async (req, res, next) => {
         throw er
     }
 }
+
+exports.getUsers = async (req, res, next) => {
+    try {
+        let users = await UserService.getAllUsers();
+        res.json({ status: 1, message: "Got all users", data:users});
+        console.log("Got all users");
+    } catch (er) {
+        res.json({ status: 0, message: "Getting users failed" });
+        console.log("Getting users failed");
+        throw er
+    }
+}

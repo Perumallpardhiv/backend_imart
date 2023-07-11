@@ -25,6 +25,14 @@ class UserService {
     static async generateToken(tokenData, secretKey, jwt_expire){
         return jwt.sign(tokenData, secretKey, {expiresIn: jwt_expire});
     }
+
+    static async getAllUsers(){
+        try {
+            return await UserModel.find();
+        } catch (e) {
+            throw e;
+        }
+    }
 }
 
 module.exports = UserService;
