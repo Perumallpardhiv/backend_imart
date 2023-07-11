@@ -38,3 +38,15 @@ exports.login = async (req, res, next) => {
         throw er
     }
 }
+
+exports.getVendors = async (req, res, next) => {
+    try {
+        let vendors = await VendorService.getAllVendors();
+        res.json({ status: 1, message: "Got all vendors", data:vendors});
+        console.log("Got all vendors");
+    } catch (er) {
+        res.json({ status: 0, message: "Getting vendors failed" });
+        console.log("Getting vendors failed");
+        throw er
+    }
+}

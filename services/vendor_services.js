@@ -25,6 +25,14 @@ class VendorService {
     static async generateToken(tokenData, secretKey, jwt_expire){
         return jwt.sign(tokenData, secretKey, {expiresIn: jwt_expire});
     }
+
+    static async getAllVendors(){
+        try {
+            return await VendorModel.find();
+        } catch (e) {
+            throw e;
+        }
+    }
 }
 
 module.exports = VendorService;
