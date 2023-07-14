@@ -27,6 +27,9 @@ exports.checkCartExist = async(req,res,next)=>{
         if(alreadyExist){
             res.json({status:1, message:"Exist in Cart", data:alreadyExist});
             console.log("Exist in Cart");
+        } else {
+            res.json({status:1, message:"Not Exist in Cart", data:alreadyExist});
+            console.log("Exist in Cart");
         }
     } catch (er) {
         res.json({status:0, message:"Checking Cart failed"});
