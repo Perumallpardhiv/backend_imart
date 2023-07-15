@@ -10,6 +10,7 @@ const OrderModel = require('./model/order_model');
 const VendorModel = require('./model/vendor_model');
 const PaymentModel = require('./model/payments_model');
 const AdminModel = require('./model/admin_model');
+const OrderListModel = require('./model/orderList_model');
 
 const port = 3000;
 

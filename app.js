@@ -10,6 +10,7 @@ const orderRouter = require('./routes/order_route');
 const vendorRouter = require('./routes/vendor_route');
 const paymentRouter = require('./routes/payments_route');
 const adminRouter = require('./routes/admin_route');
+const orderListRoute = require('./routes/orderList_route');
 
 const app = express();
 
@@ -25,5 +26,6 @@ app.use('/', orderRouter);
 app.use('/', vendorRouter);
 app.use('/', paymentRouter);
 app.use('/', adminRouter);
+app.use('/', orderListRoute);
 
 module.exports = app;
