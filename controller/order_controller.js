@@ -4,7 +4,7 @@ exports.addOrder = async(req,res,next)=>{
     try {
         const {userId, addressId, name, subTotal, discoutPrice, grandTotal, paymentMethod, status, mobile, date,delivereddate} = req.body;
         const newOrder = await OrderService.addOrder(userId, addressId, name, subTotal, discoutPrice, grandTotal, paymentMethod, status, mobile, date, delivereddate);
-        res.json({status:1, message:"New Order Added"});
+        res.json({status:1, message:"New Order Added", data:newOrder});
         console.log("New Order Added");
     } catch (er) {
         res.json({status:0, message:"Adding Order Failed"});
