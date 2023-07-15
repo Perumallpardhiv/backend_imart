@@ -13,7 +13,7 @@ class OrderListService {
 
     static async orderListSpecificOrder(orderId) {
         try {
-            const orderListSpecificOrder = await OrderListModel.find({orderId});
+            const orderListSpecificOrder = await OrderListModel.findOne({orderId});
             return orderListSpecificOrder;
         } catch (e) {
             throw e;
