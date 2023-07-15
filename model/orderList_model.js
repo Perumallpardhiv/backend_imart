@@ -26,6 +26,10 @@ const orderListSchema = new Schema({
         type:[String],
         required:true
     },
+    image:{
+        type:[String],
+        required:true
+    }
 });
 
 const OrderListModel = db.model('ordersItems', orderListSchema);

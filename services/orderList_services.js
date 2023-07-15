@@ -1,10 +1,10 @@
 const OrderListModel = require('../model/orderList_model');
 
 class OrderListService {
-    static async addOrderList(orderId, productName, quantity, mrpPrice, sellPrice) {
+    static async addOrderList(orderId, productName, quantity, mrpPrice, sellPrice, image) {
         try {
             console.log(`orderId: ${orderId}`);
-            const createOrderList = new OrderListModel({orderId, productName, quantity, mrpPrice, sellPrice});
+            const createOrderList = new OrderListModel({orderId, productName, quantity, mrpPrice, sellPrice, image});
             return await createOrderList.save();
         } catch (e) {
             throw e;
