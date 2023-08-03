@@ -2,10 +2,10 @@ const ProductService = require('../services/product_services');
 
 exports.addProduct = async (req, res, next) => {
     try {
-        const { productId, categorieId, subCategorieId, productName, description, mrpPrice, sellPrice, isWishlist, unit, image } = req.body;
+        const { productId, categorieId, subCategorieId, productName, description, mrpPrice, sellPrice, kgOrgm, isWishlist, unit, image } = req.body;
         const product = await ProductService.checkProductExist(productName);
         if (!product) {
-            const newProduct = await ProductService.addProduct(productId, categorieId, subCategorieId, productName, description, mrpPrice, sellPrice, isWishlist, unit, image);
+            const newProduct = await ProductService.addProduct(productId, categorieId, subCategorieId, productName, description, mrpPrice, sellPrice, kgOrgm, isWishlist, unit, image);
             res.json({ status: 1, message: "New Product Added" });
             console.log("Product added Successfully");
         } else {
@@ -22,8 +22,8 @@ exports.addProduct = async (req, res, next) => {
 
 exports.updateProduct = async (req, res, next) => {
     try {
-        const { productId, categorieId, subCategorieId, productName, description, mrpPrice, sellPrice, isWishlist, unit, image } = req.body;
-        const updateProduct = await ProductService.updateProduct(productId, categorieId, subCategorieId, productName, description, mrpPrice, sellPrice, isWishlist, unit, image);
+        const { productId, categorieId, subCategorieId, productName, description, mrpPrice, sellPrice, kgOrgm, isWishlist, unit, image } = req.body;
+        const updateProduct = await ProductService.updateProduct(productId, categorieId, subCategorieId, productName, description, mrpPrice, sellPrice, kgOrgm, isWishlist, unit, image);
         res.json({ status: 1, message: "Product Updated" });
         console.log("Product updated Successfully");
 

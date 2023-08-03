@@ -1,18 +1,18 @@
 const ProductModel = require('../model/product_model');
 
 class ProductService {
-    static async addProduct(productId, categorieId, subCategorieId, productName, description, mrpPrice, sellPrice, isWishlist, unit, image) {
+    static async addProduct(productId, categorieId, subCategorieId, productName, description, mrpPrice, sellPrice, kgOrgm, isWishlist, unit, image) {
         try {
             console.log(`id: ${productId}`);
             console.log(`name: ${productName}`);
-            const createProduct = new ProductModel({productId, categorieId, subCategorieId, productName, description, mrpPrice, sellPrice, isWishlist, unit, image});
+            const createProduct = new ProductModel({productId, categorieId, subCategorieId, productName, description, mrpPrice, sellPrice, kgOrgm, isWishlist, unit, image});
             return await createProduct.save();
         } catch (e) {
             throw e;
         }
     }
 
-    static async updateProduct(productId, categorieId, subCategorieId, productName, description, mrpPrice, sellPrice, isWishlist, unit, image) {
+    static async updateProduct(productId, categorieId, subCategorieId, productName, description, mrpPrice, sellPrice, kgOrgm, isWishlist, unit, image) {
         try {
             console.log(`id: ${productId}`);
             console.log(`name: ${productName}`);
@@ -24,6 +24,7 @@ class ProductService {
                     description:description,
                     mrpPrice:mrpPrice,
                     sellPrice:sellPrice,
+                    kgOrgm:kgOrgm,
                     isWishlist:isWishlist,
                     unit:unit,
                     image:image,

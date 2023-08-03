@@ -41,6 +41,10 @@ const productSchema = new Schema({
         type:String,
         required:true
     },
+    kgOrgm:{
+        type:String,
+        required:true,
+    },
     isWishlist:{
         type:Number,
         required:true
