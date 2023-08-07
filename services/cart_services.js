@@ -45,12 +45,24 @@ class CartService {
 
     static async decCartItemQuantity(userId, productId){
         try {
-            const decCartItemQuantity = await CartModel.updateOne({userId:userId, productId:productId}, {
-                $inc:{
-                    quantity:-1,
-                }
-            })
-            return decCartItemQuantity;
+            const document = await CartModel.findOne({
+                userId:userId, 
+                productId:productId
+            });
+            if(document.quantity > 0){
+                const decCartItemQuantity = await CartModel.updateOne({userId:userId, productId:productId}, {
+                    $inc:{
+                        quantity:-1,
+                    }
+                })
+                return decCartItemQuantity;
+            } else {
+                const deleteCartItemQuantity = await CartModel.deleteOne({
+                    userId:userId, 
+                    productId:productId
+                });
+                return deleteCartItemQuantity;
+            }
         } catch (e) {
             throw e;
         }
