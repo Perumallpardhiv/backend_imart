@@ -1,4 +1,12 @@
 const UserService = require('../services/user_services');
+const accountSid = "AC5a22ae6c3642b3ca8b283717ac82eb4e";
+const authToken = "9a26491f2df32432813499c439380b77";
+const verifySid = "VA1d4afff47414d72f227186a2288cb26e";
+const client = require('twilio')(accountSid, authToken);
+
+const generateOTP = () => {
+    return Math.floor(1000 + Math.random() * 9000);
+};
 
 exports.register = async (req, res, next) => {
     try {
@@ -49,5 +57,54 @@ exports.getUsers = async (req, res, next) => {
         res.json({ status: 0, message: "Getting users failed" });
         console.log("Getting users failed");
         throw er
+    }
+}
+
+exports.sendotp = async (req, res, next) => {
+    const { phoneNumber } = req.body;
+    const otp = generateOTP();
+    try {
+        client.verify.v2
+        .services(verifySid)
+        .verifications.create({ to: phoneNumber, channel: "sms" })
+        .then((verification) => {
+            console.log(`ver: ${verification.status}`);
+            res.json({ status: 1, message: "Otp sent"});
+            console.log("Otp sent");
+        })
+        // .then(() => {
+        //     const readline = require("readline").createInterface({
+        //       input: process.stdin,
+        //       output: process.stdout,
+        //     });
+        //     readline.question("Please enter the OTP:", (otpCode) => {
+        //       client.verify.v2
+        //         .services(verifySid)
+        //         .verificationChecks.create({ to: "+919293707007", code: otpCode })
+        //         .then((verification_check) => console.log(verification_check.status))
+        //         .then(() => readline.close());
+        //     });
+        //   });
+
+    } catch (er) {
+        res.json({ status: 0, message: er });
+        console.log("Otp Sending Failed");
+    }
+}
+
+exports.verifyOtp = async (req, res, next) => {
+    const { phoneNumber, otpCode } = req.body;
+    try {
+        client.verify.v2
+        .services(verifySid)
+        .verificationChecks.create({ to: phoneNumber, code: otpCode })
+        .then((verification_check) => {
+            console.log(`ver: ${verification_check.status}`);
+            res.json({ status: 1, message: "Otp verified"});
+            console.log("Otp verified");
+        })
+    } catch (er) {
+        res.json({ status: 0, message: er });
+        console.log("Otp Wrong");
     }
 }
