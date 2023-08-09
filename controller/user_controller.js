@@ -16,7 +16,9 @@ exports.register = async (req, res, next) => {
 
         if (!user) {
             const successReg = await UserService.registerUser(mobileno, device_token, name);
-            res.json({ status: 1, message: "User Registered Successfully" });
+            let tokenData = { _id: user._id, mobileno: user.mobileno, name: user.name };
+            const token = await UserService.generateToken(tokenData, "secretKey", '24h');
+            res.json({ status: 1, message: "User Registered Successfully", token:token });
             console.log("Registered Successfully");
         } else {
             res.json({ status: 0, message: "User Already exist" });
