@@ -5,10 +5,6 @@ const authToken = process.env.TWILIO_AUTH_TOKEN;
 const verifySid = "VA1d4afff47414d72f227186a2288cb26e";
 const client = require('twilio')(accountSid, authToken);
 
-const generateOTP = () => {
-    return Math.floor(1000 + Math.random() * 9000);
-};
-
 exports.register = async (req, res, next) => {
     try {
         const { mobileno, device_token, name } = req.body;
@@ -65,7 +61,6 @@ exports.getUsers = async (req, res, next) => {
 
 exports.sendotp = async (req, res, next) => {
     const { phoneNumber } = req.body;
-    const otp = generateOTP();
     try {
         client.verify.v2
         .services(verifySid)
@@ -75,20 +70,6 @@ exports.sendotp = async (req, res, next) => {
             res.json({ status: 1, message: "Otp sent"});
             console.log("Otp sent");
         })
-        // .then(() => {
-        //     const readline = require("readline").createInterface({
-        //       input: process.stdin,
-        //       output: process.stdout,
-        //     });
-        //     readline.question("Please enter the OTP:", (otpCode) => {
-        //       client.verify.v2
-        //         .services(verifySid)
-        //         .verificationChecks.create({ to: "+919293707007", code: otpCode })
-        //         .then((verification_check) => console.log(verification_check.status))
-        //         .then(() => readline.close());
-        //     });
-        //   });
-
     } catch (er) {
         res.json({ status: 0, message: er });
         console.log("Otp Sending Failed");
@@ -107,7 +88,7 @@ exports.verifyOtp = async (req, res, next) => {
             console.log("Otp verified");
         })
     } catch (er) {
-        res.json({ status: 0, message: er });
+        res.json({ status: 0, message: "Otp Wrong"});
         console.log("Otp Wrong");
     }
 }
