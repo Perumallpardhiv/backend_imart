@@ -12,7 +12,7 @@ exports.register = async (req, res, next) => {
 
         if (!admin) {
             const successReg = await AdminService.registerAdmin(mobileno, device_token, name);
-            let tokenData = { _id: admin._id, mobileno: admin.mobileno, name: admin.name };
+            let tokenData = { _id: successReg._id, mobileno: successReg.mobileno, name: successReg.name };
             const token = await AdminService.generateToken(tokenData, "secretKey", '24h');
             res.json({ status: 1, message: "Admin Registered Successfully", token: token});
             console.log("Registered Successfully");

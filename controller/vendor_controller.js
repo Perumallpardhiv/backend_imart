@@ -11,7 +11,7 @@ exports.register = async (req, res, next) => {
         const user = await VendorService.checkVendor(mobileno);
         if (!user) {
             const successReg = await VendorService.registerVendor(mobileno, device_token, name);
-            let tokenData = { _id: user._id, mobileno: user.mobileno, name: user.name };
+            let tokenData = { _id: successReg._id, mobileno: successReg.mobileno, name: successReg.name };
             const token = await VendorService.generateToken(tokenData, "secretKey", '24h');
             res.json({ status: 1, message: "Vendor Registered Successfully", token: token});
             console.log("Registered Successfully");
