@@ -12,6 +12,16 @@ class ProductService {
         }
     }
 
+    static async deleteProduct(productId) {
+        try {
+            console.log(`id: ${productId}`);
+            const deleteProduct = await ProductModel.deleteOne({productId:productId});
+            return deleteProduct;
+        } catch (e) {
+            throw e;
+        }
+    }
+
     static async updateProduct(productId, categorieId, subCategorieId, productName, description, mrpPrice, sellPrice, kgOrgm, isWishlist, unit, image) {
         try {
             console.log(`id: ${productId}`);

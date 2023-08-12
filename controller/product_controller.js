@@ -20,6 +20,19 @@ exports.addProduct = async (req, res, next) => {
     }
 }
 
+exports.deleteProduct = async (req, res, next) => {
+    try {
+        const { productId } = req.body;
+        const delProduct = await ProductService.deleteProduct(productId);
+        res.json({ status: 1, message: "Product Deleted" });
+        console.log("Product deleted Successfully");
+    } catch (er) {
+        res.json({ status: 0, message: "Deleting Product failed" });
+        console.log("Deleting Product failed");
+        throw er
+    }
+}
+
 exports.updateProduct = async (req, res, next) => {
     try {
         const { productId, categorieId, subCategorieId, productName, description, mrpPrice, sellPrice, kgOrgm, isWishlist, unit, image } = req.body;
